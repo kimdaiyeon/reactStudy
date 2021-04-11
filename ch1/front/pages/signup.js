@@ -12,6 +12,13 @@ TextInput.propTypes = {
     value: PropTypes.string,
 }
 
+export const useInput = (initValue = null) =>{
+    const [value, setter] = useState(initValue);
+    const handler = useCallback((e) =>{
+        setter(e.target.value);
+    }, []);
+    return [value, handler];
+};
 
 const Signup =() =>{
 
@@ -20,17 +27,9 @@ const Signup =() =>{
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
 
-    const userInput = (initValue = null) =>{
-        const [value, setter] = useState(initValue);
-        const handler = useCallback((e) =>{
-            setter(e.target.value);
-        }, []);
-        return [value, handler];
-    }
-
-    const [id, onChangeId] = userInput('');
-    const [nickname, onChangeNickname] = userInput('');
-    const [password, onChangePassword] = userInput('');
+    const [id, onChangeId] = useInput('');
+    const [nickname, onChangeNickname] = useInput('');
+    const [password, onChangePassword] = useInput('');
 
     const onSubmit = useCallback((e) =>{
         e.preventDefault();
