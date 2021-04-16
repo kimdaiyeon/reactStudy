@@ -1,5 +1,13 @@
 export const initialState = {
-    mainPosts:[],
+    mainPosts:[{
+        User:{
+            id:1,
+            nickname:'김대연',
+        },
+        content:'게시글입니다',
+        img:'http://memop.ediya.com/assets/layouts/layout4/img/logo-light.png',
+    }],
+    imagePaths:[],
 };
 
 const ADD_POST = 'ADD_POST';

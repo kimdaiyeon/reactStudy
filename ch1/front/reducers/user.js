@@ -1,6 +1,12 @@
+const dummyUser = {
+    nickname:'디와이',
+    Post:[],
+    Followings:[],
+    Followers:[],
+};
 export const initialState = {
     isLoggedIn: false,
-    user:{},
+    user:null,
 };
 
 export const LOG_IN = 'LOG_IN'; //액션의 이름
@@ -8,9 +14,6 @@ export const LOG_OUT = 'LOG_OUT'; //액션의 이름
 
 export const loginAction = {
     type: LOG_IN,
-    data: {
-        nickname: '디와이',
-    },
 };
 
 export const logoutAction={
@@ -23,7 +26,7 @@ const reducer = (state = initialState, action ) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                user: action.data,
+                user: dummyUser,
             }
         }
 

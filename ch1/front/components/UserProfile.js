@@ -1,32 +1,27 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Avatar, Button, Card, Form, Input} from "antd";
-
-const dummy ={
-    isLoggedIn:true,
-    imagePaths:[],
-    mainPosts:[{
-        User:{
-            id:1,
-            nickname:'김대연',
-        },
-        content:'게시글입니다',
-        img:'http://memop.ediya.com/assets/layouts/layout4/img/logo-light.png',
-    }],
-};
+import {useSelector, useDispatch} from "react-redux";
+import {logoutAction} from "../reducers/user";
 
 const UserProfile = () =>{
+    const {user} = useSelector(state=> state.user);
+    const dispatch = useDispatch();
+    const onLogout = useCallback(()=>{
+        dispatch(logoutAction);
+    }, []);
     return (
         <Card
             actions={[
-                <div key="twit">짹짹<br/>{dummy.Post.length}</div>,
-                <div key="following">팔로잉<br/>{dummy.Followings.length}</div>,
-                <div key="follower">팔로<br/>{dummy.Followers.length}</div>
+                <div key="twit">짹짹<br/>{user.Post.length}</div>,
+                <div key="following">팔로잉<br/>{user.Followings.length}</div>,
+                <div key="follower">팔로<br/>{user.Followers.length}</div>
             ]}
         >
             <Card.Meta
-                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
-                title={dummy.nickname}
+                avatar={<Avatar>{user.nickname[0]}</Avatar>}
+                title={user.nickname}
             />
+            <Button onClick={onLogout}>로그아웃</Button>
         </Card>
     )
 }
